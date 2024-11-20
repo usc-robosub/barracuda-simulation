@@ -1,0 +1,14 @@
+services:
+  barracuda-simulation:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: barracuda-simulation
+    privileged: true
+    tty: true
+    network_mode: host
+    volumes:
+      - $HOME/.ssh:/root/.ssh
+      - $XAUTHORITY:/root/.Xauthority:ro
+    environment:
+      - DISPLAY
