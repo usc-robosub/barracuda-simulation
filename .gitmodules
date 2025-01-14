@@ -1,0 +1,23 @@
+[submodule "catkin_ws/src/dave"]
+	path = catkin_ws/src/dave
+	url = https://github.com/Field-Robotics-Lab/dave.git
+[submodule "catkin_ws/src/ds_msgs"]
+	path = catkin_ws/src/ds_msgs
+	url = https://github.com/Field-Robotics-Lab/ds_msgs.git
+	branch = nps_dev
+[submodule "catkin_ws/src/ds_sim"]
+	path = catkin_ws/src/ds_sim
+	url = https://github.com/Field-Robotics-Lab/ds_sim.git
+	branch = nps_dev
+[submodule "catkin_ws/src/uuv_manipulators"]
+	path = catkin_ws/src/uuv_manipulators
+	url = https://github.com/Field-Robotics-Lab/uuv_manipulators.git
+[submodule "catkin_ws/src/uuv_simulator"]
+	path = catkin_ws/src/uuv_simulator
+	url = https://github.com/Field-Robotics-Lab/uuv_simulator.git
+[submodule "catkin_ws/src/eca_a9"]
+	path = catkin_ws/src/eca_a9
+	url = https://github.com/uuvsimulator/eca_a9
+[submodule "catkin_ws/src/barracuda_description"]
+	path = catkin_ws/src/barracuda_description
+	url = git@github.com:usc-robosub/barracuda_description.git
