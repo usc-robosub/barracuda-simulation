@@ -21,3 +21,4 @@
 [submodule "catkin_ws/src/barracuda_description"]
 	path = catkin_ws/src/barracuda_description
 	url = git@github.com:usc-robosub/barracuda_description.git
+    branch = 2-update-robot-visual-and-collision-model-to-match-the-new-design
