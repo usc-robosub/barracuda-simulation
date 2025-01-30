@@ -1,0 +1,5 @@
+<launch>
+    <include file="$(find barracuda_description)/launch/upload_barracuda.launch"/>
+
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" respawn="true" output="screen" ns="barracuda"/>
+</launch>
