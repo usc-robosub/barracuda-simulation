@@ -1,4 +1,0 @@
-uint8 BEGIN_FILE_TRANSFER = 1
-
-uint8 action
----
