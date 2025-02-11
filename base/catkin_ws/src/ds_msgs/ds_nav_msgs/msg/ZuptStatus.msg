@@ -1,9 +1,0 @@
-uint8 NONE = 0
-uint8 STATIC_10 = 1
-uint8 STATIC_01 = 2
-uint8 AUTOSTATIC_001 = 3
-uint8 AUTOSTATIC_BENCH_001 = 4
-uint8 FIXED_POSITION = 6
-
-
-uint8 status 
