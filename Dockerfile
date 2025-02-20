@@ -1,4 +1,4 @@
-FROM ghcr.io/usc-robosub/barracuda-simulation/base:latest
+FROM ghcr.io/usc-robosub/dave-base:main
 
 COPY . /opt/barracuda-simulation
 
