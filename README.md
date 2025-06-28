@@ -2,7 +2,7 @@
 
 ## Running the Simulator on an Apple Silicon Mac
 
-1. Install UTM from [https://mac.getutm.app/](https://mac.getutm.app/).
+1. Install UTM (from [https://mac.getutm.app/](https://mac.getutm.app/, or with ```brew install --cask utm```).
 2. Download Ubuntu 20.04 64-bit ARM (ARMv8/AArch64) server install image from [https://cdimage.ubuntu.com/releases/focal/release/](https://cdimage.ubuntu.com/releases/focal/release/).
 3. Create a new Linux VM in UTM (virtualize) with that image.
 4. At the "Guided storage configuration" step, make sure the "Set up this disk as an LVM group" box is **not** ticked (it will be by default).
