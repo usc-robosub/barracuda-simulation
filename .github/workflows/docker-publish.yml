@@ -1,0 +1,36 @@
+name: Docker Publish - barrracuda-simulation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repo (with submodules)
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry (GHCR)
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push barrracuda-simulation
+        run: |
+          IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/barrracuda-simulation:latest
+          docker build --no-cache -t $IMAGE_NAME .
+          docker push $IMAGE_NAME
