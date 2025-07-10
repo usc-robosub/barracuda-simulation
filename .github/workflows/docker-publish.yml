@@ -1,4 +1,4 @@
-name: Docker Publish - barrracuda-simulation
+name: Docker Publish - barracuda-simulation
 
 on:
   push:
@@ -29,8 +29,8 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push barrracuda-simulation
+      - name: Build and push barracuda-simulation
         run: |
-          IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/barrracuda-simulation:latest
+          IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/barracuda-simulation:latest
           docker build --no-cache -t $IMAGE_NAME .
           docker push $IMAGE_NAME
