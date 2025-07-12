@@ -1,6 +1,8 @@
 
 FROM ros:noetic-ros-base-focal
 
+COPY . /opt/barracuda-simulation
+
 RUN apt-get update && apt-get install -y \
     locales \
     && locale-gen en_US.UTF-8 \
@@ -32,10 +34,13 @@ RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main"
     && apt-get install -y ${GAZ} lib${GAZ}-dev python3-catkin-tools python3-rosdep python3-rosinstall python3-rosinstall-generator python3-vcstool ros-${DIST}-gazebo-plugins ros-${DIST}-gazebo-ros ros-${DIST}-gazebo-ros-control ros-${DIST}-gazebo-ros-pkgs ros-${DIST}-effort-controllers ros-${DIST}-geographic-info ros-${DIST}-hector-gazebo-plugins ros-${DIST}-image-view ros-${DIST}-joint-state-controller ros-${DIST}-joint-state-publisher ros-${DIST}-joy ros-${DIST}-joy-teleop ros-${DIST}-kdl-parser-py ros-${DIST}-key-teleop ros-${DIST}-move-base ros-${DIST}-moveit-commander ros-${DIST}-moveit-planners ros-${DIST}-moveit-simple-controller-manager ros-${DIST}-moveit-ros-visualization ros-${DIST}-pcl-ros ros-${DIST}-robot-localization ros-${DIST}-robot-state-publisher ros-${DIST}-ros-base ros-${DIST}-ros-controllers ros-${DIST}-rqt ros-${DIST}-rqt-common-plugins ros-${DIST}-rqt-robot-plugins ros-${DIST}-rviz ros-${DIST}-teleop-tools ros-${DIST}-teleop-twist-joy ros-${DIST}-teleop-twist-keyboard ros-${DIST}-tf2-geometry-msgs ros-${DIST}-tf2-tools ros-${DIST}-urdfdom-py ros-${DIST}-velodyne-gazebo-plugins ros-${DIST}-velodyne-simulator ros-${DIST}-xacro \
     && rm -rf /var/lib/apt/lists/* \
     && pip3 install -U vcstool \
-    && pip3 install -U catkin_tools
+    && pip3 install -U catkin_tools \
+    && . /opt/ros/noetic/setup.sh \
+    && cd /opt/barracuda-simulation/catkin_ws \
+    && catkin build
+
 
     
-COPY entrypoint.sh /entrypoint.sh
-ENTRYPOINT ["/bin/bash", "entrypoint.sh"]
+WORKDIR /opt
 
-CMD ["bash"]
+CMD ["/bin/bash", "/opt/barracuda-simulation/entrypoint.sh"]
