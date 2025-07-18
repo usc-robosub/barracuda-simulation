@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Simulation configuration arguments -->
+  <arg name="gui" default="true"/>
+  <arg name="paused" default="false"/>
+  <arg name="world_name" default="$(find dave_worlds)/worlds/dave_ocean_waves.world"/>
+  <arg name="debug" default="false"/>
+  <arg name="verbose" default="false"/>
+  
+  <!-- Robot configuration arguments -->
+  <arg name="namespace" default="barracuda"/>
+  <arg name="velocity_control" default="true"/>
+  <arg name="joy_id" default="0"/>
+  
+  <!-- Robot spawn position -->
+  <arg name="robot_x" default="25"/>
+  <arg name="robot_y" default="0"/>
+  <arg name="robot_z" default="-85"/>
+  <arg name="robot_roll" default="0"/>
+  <arg name="robot_pitch" default="0"/>
+  <arg name="robot_yaw" default="0"/>
+  
+  <!-- Gate spawn position -->
+  <arg name="gate_x" default="50"/>
+  <arg name="gate_y" default="0"/>
+  <arg name="gate_z" default="-85"/>
+  <arg name="gate_roll" default="1.5708"/>
+  <arg name="gate_pitch" default="0"/>
+  <arg name="gate_yaw" default="1.5708"/>
+
+  <!-- Launch Gazebo with the ocean world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(arg world_name)"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="$(arg debug)"/>
+    <arg name="verbose" value="$(arg verbose)"/>
+  </include>
+
+  <!-- Use NED frame (North East Down) -->
+  <include file="$(find uuv_assistants)/launch/publish_world_ned_frame.launch"/>
+
+  <!-- World models (seafloor, boundaries, etc.) -->
+  <node name="publish_world_models"
+        pkg="uuv_assistants"
+        type="publish_world_models.py"
+        output="screen">
+    <rosparam subst_value="true">
+      meshes:
+          heightmap:
+              mesh: package://uuv_gazebo_worlds/models/sand_heightmap/meshes/heightmap.dae
+              model: sand_heightmap
+          seafloor:
+              plane: [2000, 2000, 0.1]
+              pose:
+                  position: [0, 0, -100]
+          north:
+              plane: [0.1, 2000, 100]
+              pose:
+                  position: [1000, 0, -50]
+          south:
+              plane: [0.1, 2000, 100]
+              pose:
+                  position: [-1000, 0, -50]
+          west:
+              plane: [2000, 0.1, 100]
+              pose:
+                  position: [0, -1000, -50]
+          east:
+              plane: [2000, 0.1, 100]
+              pose:
+                  position: [0, 1000, -50]
+    </rosparam>
+  </node>
+
+  <!-- Load and spawn the Barracuda robot -->
+  <include file="$(find barracuda_description)/launch/upload_barracuda.launch"/>
+  
+  <!-- Joystick control for the robot -->
+  <include file="$(find dave_nodes)/launch/joy_thrusterop.launch">
+    <arg name="joy_id" value="$(arg joy_id)"/>
+    <arg name="namespace" value="$(arg namespace)"/>
+  </include>
+  
+  <!-- Spawn the Barracuda robot in Gazebo -->
+  <node name="spawn_barracuda" pkg="gazebo_ros" type="spawn_model"
+        respawn="false" output="screen"
+        args="-urdf -x $(arg robot_x) -y $(arg robot_y) -z $(arg robot_z) -R $(arg robot_roll) -P $(arg robot_pitch) -Y $(arg robot_yaw) -model $(arg namespace) -param $(arg namespace)/robot_description"/>
+
+  <!-- Robot state publisher for the Barracuda -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen" ns="$(arg namespace)"/>
+
+  <!-- Load the gate description -->
+  <param name="gate_description" textfile="$(find gate_description)/urdf/gate.urdf" />
+  
+  <!-- Spawn the gate in Gazebo -->
+  <node name="spawn_gate" pkg="gazebo_ros" type="spawn_model"
+        respawn="false" output="screen"
+        args="-urdf -x $(arg gate_x) -y $(arg gate_y) -z $(arg gate_z) -R $(arg gate_roll) -P $(arg gate_pitch) -Y $(arg gate_yaw) -model gate -param gate_description -reference_frame world"/>
+
+  <!-- Transform from world to map for navigation -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="world_to_map" args="0 0 0 0 0 0 world map"/>
+
+</launch>

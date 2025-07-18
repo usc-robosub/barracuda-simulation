@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="Gate">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-4.61494760954857E-05 0.0614343033656225 0.000453916572084546"
+        rpy="0 0 0" />
+      <mass
+        value="21.4071309598792" />
+      <inertia
+        ixx="3.26785626306042"
+        ixy="-2.97405270378902"
+        ixz="4.02122745147932E-06"
+        iyy="21.8693046189252"
+        iyz="-0.00125572503303462"
+        izz="25.1213241369472" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gate_description/meshes/gate.dae" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gate_description/meshes/gate.dae" />
+      </geometry>
+    </collision>
+  </link>
+  
+  
+  <!-- Additional gazebo properties for the entire robot -->
+  <gazebo>
+    <static>true</static>
+  </gazebo>
+</robot>
