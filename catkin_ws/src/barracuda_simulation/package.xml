@@ -13,7 +13,6 @@
   <buildtool_depend>catkin</buildtool_depend>
   
   <!-- Runtime dependencies -->
-  <exec_depend>roslaunch</exec_depend>
   <exec_depend>gazebo_ros</exec_depend>
   <exec_depend>barracuda_description</exec_depend>
   <exec_depend>gate_description</exec_depend>
