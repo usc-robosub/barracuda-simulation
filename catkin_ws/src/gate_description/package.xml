@@ -5,9 +5,6 @@
     URDF Description package for competition gate obstacle.
     Contains 3D models and launch files for robosub gate.
   </description>
-  <author>TODO</author>
-  <maintainer email="TODO@email.com" />
-  <license>BSD</license>
   <buildtool_depend>catkin</buildtool_depend>
   <depend>roslaunch</depend>
   <depend>robot_state_publisher</depend>
