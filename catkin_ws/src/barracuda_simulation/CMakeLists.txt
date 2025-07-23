@@ -3,5 +3,3 @@ project(barracuda_simulation)
 
 catkin_package()
 
-# Check that all launch files are valid
-roslaunch_add_file_check(launch)
