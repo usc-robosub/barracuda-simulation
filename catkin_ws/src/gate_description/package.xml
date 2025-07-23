@@ -1,0 +1,15 @@
+<package format="2">
+  <name>gate_description</name>
+  <version>1.0.0</version>
+  <description>
+    URDF Description package for competition gate obstacle.
+    Contains 3D models and launch files for robosub gate.
+  </description>
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>roslaunch</depend>
+  <depend>robot_state_publisher</depend>
+  <depend>gazebo_ros</depend>
+  <export>
+    <architecture_independent />
+  </export>
+</package>
