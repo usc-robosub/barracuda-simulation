@@ -1,6 +1,6 @@
 <launch>
   <param
-    name="robot_description"
+    name="gate_description"
     textfile="$(find gate_description)/urdf/gate.urdf" />
   <node
     name="joint_state_publisher_gui"

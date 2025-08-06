@@ -18,15 +18,15 @@
   <arg name="robot_z" default="-85"/>
   <arg name="robot_roll" default="0"/>
   <arg name="robot_pitch" default="0"/>
-  <arg name="robot_yaw" default="0"/>
+  <arg name="robot_yaw" default="3.14"/>
   
   <!-- Gate spawn position -->
-  <arg name="gate_x" default="50"/>
+  <arg name="gate_x" default="27"/>
   <arg name="gate_y" default="0"/>
   <arg name="gate_z" default="-85"/>
-  <arg name="gate_roll" default="1.5708"/>
+  <arg name="gate_roll" default="0"/>
   <arg name="gate_pitch" default="0"/>
-  <arg name="gate_yaw" default="1.5708"/>
+  <arg name="gate_yaw" default="0"/>
 
   <!-- Launch Gazebo with the ocean world -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -37,6 +37,7 @@
     <arg name="headless" value="false"/>
     <arg name="debug" value="$(arg debug)"/>
     <arg name="verbose" value="$(arg verbose)"/>
+    <arg name="extra_gazebo_args" value="/barracuda/dvl_twist:=/barracuda/dvl/twist" />
   </include>
 
   <!-- Use NED frame (North East Down) -->
