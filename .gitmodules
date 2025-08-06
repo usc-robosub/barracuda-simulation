@@ -18,7 +18,10 @@
 [submodule "catkin_ws/src/eca_a9"]
 	path = catkin_ws/src/eca_a9
 	url = https://github.com/uuvsimulator/eca_a9
-[submodule "catkin_ws/src/barracuda_description"]
-	path = catkin_ws/src/barracuda_description
+[submodule "catkin_ws/src/rexrov2"]
+	path = catkin_ws/src/rexrov2
+	url = git@github.com:uuvsimulator/rexrov2.git
+[submodule "catkin_ws/src/barracuda/barracuda_description"]
+	path = catkin_ws/src/barracuda/barracuda_description
 	url = git@github.com:usc-robosub/barracuda_description.git
-    branch = main
+	branch = rexrov2-structure

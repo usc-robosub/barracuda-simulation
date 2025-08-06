@@ -8,7 +8,10 @@ services:
     tty: true
     network_mode: host
     volumes:
-      - $HOME/.ssh:/root/.ssh
-      - $XAUTHORITY:/root/.Xauthority:ro
+      # - $HOME/.ssh:/root/.ssh
+      # - $XAUTHORITY:/root/.Xauthority:ro
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - $PWD/catkin_ws/src/barracuda:/home/ros/catkin_ws/src/barracuda
+    user: ros
     environment:
       - DISPLAY
