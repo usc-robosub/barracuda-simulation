@@ -18,7 +18,7 @@
   <arg name="robot_z" default="-85"/>
   <arg name="robot_roll" default="0"/>
   <arg name="robot_pitch" default="0"/>
-  <arg name="robot_yaw" default="3.14"/>
+  <arg name="robot_yaw" default="0"/>
   
   <!-- Gate spawn position -->
   <arg name="gate_x" default="27"/>

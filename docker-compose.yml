@@ -12,3 +12,4 @@ services:
       - $XAUTHORITY:/root/.Xauthority:ro
     environment:
       - DISPLAY
+      # - IGN_IP=127.0.0.1
