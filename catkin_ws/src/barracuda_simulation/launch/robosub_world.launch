@@ -21,12 +21,20 @@
   <arg name="robot_yaw" default="0"/>
   
   <!-- Gate spawn position -->
-  <arg name="gate_x" default="27"/>
+  <arg name="gate_x" default="30"/>
   <arg name="gate_y" default="0"/>
   <arg name="gate_z" default="-85"/>
   <arg name="gate_roll" default="0"/>
   <arg name="gate_pitch" default="0"/>
   <arg name="gate_yaw" default="0"/>
+  
+  <!-- Channel spawn position -->
+  <arg name="channel_x" default="35"/>
+  <arg name="channel_y" default="0"/>
+  <arg name="channel_z" default="-85"/>
+  <arg name="channel_roll" default="0"/>
+  <arg name="channel_pitch" default="0"/>
+  <arg name="channel_yaw" default="0"/>
 
   <!-- Launch Gazebo with the ocean world -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -100,6 +108,14 @@
   <node name="spawn_gate" pkg="gazebo_ros" type="spawn_model"
         respawn="false" output="screen"
         args="-urdf -x $(arg gate_x) -y $(arg gate_y) -z $(arg gate_z) -R $(arg gate_roll) -P $(arg gate_pitch) -Y $(arg gate_yaw) -model gate -param gate_description -reference_frame world"/>
+
+  <!-- Load the channel description -->
+  <param name="channel_description" textfile="$(find channel_description)/urdf/channel.urdf" />
+  
+  <!-- Spawn the channel in Gazebo -->
+  <node name="spawn_channel" pkg="gazebo_ros" type="spawn_model"
+        respawn="false" output="screen"
+        args="-urdf -x $(arg channel_x) -y $(arg channel_y) -z $(arg channel_z) -R $(arg channel_roll) -P $(arg channel_pitch) -Y $(arg channel_yaw) -model channel -param channel_description -reference_frame world"/>
 
   <!-- Transform from world to map for navigation -->
   <node pkg="tf2_ros" type="static_transform_publisher" name="world_to_map" args="0 0 0 0 0 0 world map"/>

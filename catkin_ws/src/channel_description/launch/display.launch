@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="model" default="$(find channel_description)/urdf/channel.urdf"/>
+  <arg name="gui" default="true" />
+  <arg name="rvizconfig" default="$(find channel_description)/rviz/urdf.rviz" />
+
+  <param name="robot_description" textfile="$(arg model)" />
+
+  <node if="$(arg gui)" name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  <node if="$(arg gui)" name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+</launch>

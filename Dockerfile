@@ -6,7 +6,8 @@ RUN . /opt/ros/noetic/setup.sh \
     && cd /opt/barracuda-simulation/catkin_ws \
     && catkin build barracuda_description \
     && catkin build barracuda_simulation \
-    && catkin build gate_description
+    && catkin build gate_description \
+    && catkin build channel_description
 
 # Set working directory
 WORKDIR /opt
