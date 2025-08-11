@@ -7,9 +7,26 @@ services:
     privileged: true
     tty: true
     network_mode: host
+    # Run as host user (fallback 1000:1000)
+    user: "${UID:-1000}:${GID:-1000}"
+    # Ensure access to GPU/render devices
+    group_add:
+      - "${VIDEO_GID:-44}"
+      - "${RENDER_GID:-109}"
     volumes:
       - $HOME/.ssh:/root/.ssh
-      - $XAUTHORITY:/root/.Xauthority:ro
+      # XWayland/X11 socket
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      # Wayland runtime dir (defaults to /run/user/1000)
+      - ${XDG_RUNTIME_DIR:-/run/user/1000}:${XDG_RUNTIME_DIR:-/run/user/1000}:rw
+      # Direct Rendering (hardware accel)
+      - /dev/dri:/dev/dri
     environment:
       - DISPLAY
-      # - IGN_IP=127.0.0.1
+      - WAYLAND_DISPLAY
+      - XDG_RUNTIME_DIR
+      # NVIDIA runtime env
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+    # Request all GPUs (Compose v2+)
+    gpus: all
