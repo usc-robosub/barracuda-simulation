@@ -1,0 +1,1700 @@
+<sdf version='1.7'>
+  <world name='oceans_waves'>
+    <physics name='default_physics' default='1' type='ode'>
+      <max_step_size>0.002</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>500</real_time_update_rate>
+      <ode>
+        <solver>
+          <type>world</type>
+          <iters>50</iters>
+          <sor>1.3</sor>
+          <use_dynamic_moi_rescaling>0</use_dynamic_moi_rescaling>
+        </solver>
+        <constraints>
+          <cfm>0</cfm>
+          <erp>0.2</erp>
+          <contact_max_correcting_vel>100</contact_max_correcting_vel>
+          <contact_surface_layer>0.001</contact_surface_layer>
+        </constraints>
+        <ode_quiet>1</ode_quiet>
+      </ode>
+    </physics>
+    <scene>
+      <ambient>0.01 0.01 0.01 1</ambient>
+      <sky>
+        <clouds>
+          <speed>12</speed>
+        </clouds>
+      </sky>
+      <shadows>1</shadows>
+      <background>0.7 0.7 0.7 1</background>
+    </scene>
+    <spherical_coordinates>
+      <latitude_deg>56.719</latitude_deg>
+      <longitude_deg>3.51562</longitude_deg>
+      <surface_model>EARTH_WGS84</surface_model>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    <light name='sun1' type='directional'>
+      <pose>50 0 150 0 -0 0</pose>
+      <diffuse>1 1 1 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <direction>0.3 0.3 -1</direction>
+      <cast_shadows>0</cast_shadows>
+      <attenuation>
+        <range>10</range>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <light name='sun_diffuse' type='directional'>
+      <pose>-50 0 -150 0 -0 0</pose>
+      <diffuse>0.6 0.6 0.6 1</diffuse>
+      <specular>0 0 0 1</specular>
+      <direction>-0.3 -0.3 -1</direction>
+      <cast_shadows>0</cast_shadows>
+      <attenuation>
+        <range>10</range>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <light name='sun_diffuse_1' type='directional'>
+      <pose>-100 500 -20 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>1 1 1 1</specular>
+      <direction>-1 -1 0</direction>
+      <cast_shadows>0</cast_shadows>
+      <attenuation>
+        <range>10</range>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <light name='sun_diffuse_2' type='directional'>
+      <pose>-150 -130 50 0 -0 0</pose>
+      <diffuse>0.6 0.6 0.6 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>0.5 0.5 -1</direction>
+      <cast_shadows>0</cast_shadows>
+      <attenuation>
+        <range>10</range>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <model name='world_ned'>
+      <pose>0 0 0 0 -0 0</pose>
+      <static>1</static>
+      <link name='world_ned'>
+        <gravity>0</gravity>
+        <pose>0 0 0 -3.14159 -0 1.5708</pose>
+        <visual name='N_visual'>
+          <pose>0.25 0 0 1.5708 -0 1.5708</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.01</radius>
+              <length>0.5</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Red</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='E_visual'>
+          <pose>0 0.25 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.01</radius>
+              <length>0.5</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Green</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='D_visual'>
+          <pose>0 0 0.25 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.01</radius>
+              <length>0.5</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Blue</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='sand_heightmap'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='ground'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://sand_heightmap/meshes/heightmap.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='ground_sand'>
+          <cast_shadows>1</cast_shadows>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://sand_heightmap/meshes/heightmap.dae</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://Media/materials/scripts/sand.material</uri>
+              <name>UUVSimulator/SandAndStones</name>
+            </script>
+            <emissive>0.6 0.6 0.6 1</emissive>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0 0 -95 0 -0 0</pose>
+    </model>
+    <plugin name='underwater_current_plugin' filename='libuuv_underwater_current_ros_plugin.so'>
+      <namespace>hydrodynamics</namespace>
+      <constant_current>
+        <topic>current_velocity</topic>
+        <velocity>
+          <mean>0</mean>
+          <min>0</min>
+          <max>5</max>
+          <mu>0.0</mu>
+          <noiseAmp>0.0</noiseAmp>
+        </velocity>
+        <horizontal_angle>
+          <mean>0</mean>
+          <min>-3.141592653589793238</min>
+          <max>3.141592653589793238</max>
+          <mu>0.0</mu>
+          <noiseAmp>0.0</noiseAmp>
+        </horizontal_angle>
+        <vertical_angle>
+          <mean>0</mean>
+          <min>-3.141592653589793238</min>
+          <max>3.141592653589793238</max>
+          <mu>0.0</mu>
+          <noiseAmp>0.0</noiseAmp>
+        </vertical_angle>
+      </constant_current>
+    </plugin>
+    <plugin name='sc_interface' filename='libuuv_sc_ros_interface_plugin.so'/>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose>25.5928 -10.1223 -2.58919 0 0.299437 1.05923</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <wind/>
+    <model name='gate'>
+      <link name='base_link'>
+        <inertial>
+          <pose>-4.6e-05 0.061434 0.000454 0 -0 0</pose>
+          <mass>21.4071</mass>
+          <inertia>
+            <ixx>3.26786</ixx>
+            <ixy>-2.97405</ixy>
+            <ixz>4.02123e-06</ixz>
+            <iyy>21.8693</iyy>
+            <iyz>-0.00125573</iyz>
+            <izz>25.1213</izz>
+          </inertia>
+        </inertial>
+        <collision name='base_link_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/opt/barracuda-simulation/catkin_ws/src/gate_description/meshes/gate.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='base_link_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/opt/barracuda-simulation/catkin_ws/src/gate_description/meshes/gate.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <static>1</static>
+      <pose>30 0 -85 0 -0 0</pose>
+    </model>
+    <model name='barracuda'>
+      <link name='barracuda/base_link'>
+        <inertial>
+          <pose>0 0 0.000253 0 -0 0</pose>
+          <mass>36.63</mass>
+          <inertia>
+            <ixx>2.56515</ixx>
+            <ixy>0</ixy>
+            <ixz>-9.76385e-19</ixz>
+            <iyy>8.08109</iyy>
+            <iyz>0</iyz>
+            <izz>8.57373</izz>
+          </inertia>
+        </inertial>
+        <collision name='barracuda/base_link_fixed_joint_lump__barracuda/barracuda_link_collision'>
+          <pose>0 0 0 0 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///opt/barracuda-simulation/catkin_ws/src/barracuda_description/meshes/barracuda_base_link.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='barracuda/base_link_fixed_joint_lump__barracuda/dvl_link_collision_1'>
+          <pose>0 0 -0.15 3.14159 -0 3.14159</pose>
+          <geometry>
+            <cylinder>
+              <length>0.025</length>
+              <radius>0.033</radius>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='barracuda/base_link_fixed_joint_lump__barracuda/barracuda_link_visual'>
+          <pose>0 0 0 0 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///opt/barracuda-simulation/catkin_ws/src/barracuda_description/meshes/barracuda_base_link.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='barracuda/base_link_fixed_joint_lump__barracuda/zed_camera_center_visual_1'>
+          <pose>-0.3 0 0.01325 0 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///opt/barracuda-simulation/catkin_ws/src/barracuda_description/meshes/zedm.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='barracuda/base_link_fixed_joint_lump__barracuda/dvl_link_visual_2'>
+          <pose>0 0 -0.15 3.14159 -0 3.14159</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///opt/barracuda-simulation/catkin_ws/src/barracuda_description/meshes/dvl.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <sensor name='imu_sensor' type='imu'>
+          <always_on>1</always_on>
+          <update_rate>100</update_rate>
+          <visualize>1</visualize>
+          <topic>barracuda/imu/data</topic>
+          <plugin name='imu_plugin' filename='libgazebo_ros_imu_sensor.so'>
+            <topicName>barracuda/imu/data</topicName>
+            <bodyName>barracuda/imu_link</bodyName>
+            <updateRateHZ>100.0</updateRateHZ>
+            <gaussianNoise>2e-4</gaussianNoise>
+            <xyzOffset>0 0 0</xyzOffset>
+            <rpyOffset>0 0 0</rpyOffset>
+            <frameName>barracuda/imu_link</frameName>
+            <initialOrientationAsReference>0</initialOrientationAsReference>
+            <robotNamespace>/</robotNamespace>
+          </plugin>
+          <pose>0 0 0 0 -0 0</pose>
+          <imu/>
+        </sensor>
+        <sensor name='ping1d_sensor' type='ray'>
+          <visualize>1</visualize>
+          <update_rate>10</update_rate>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>1</samples>
+                <resolution>1</resolution>
+                <min_angle>0</min_angle>
+                <max_angle>0</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>1</samples>
+                <min_angle>0</min_angle>
+                <max_angle>0</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.3</min>
+              <max>100</max>
+            </range>
+          </ray>
+          <plugin name='altimeter_sonar' filename='libgazebo_ros_range.so'>
+            <gaussianNoise>0.005</gaussianNoise>
+            <alwaysOn>1</alwaysOn>
+            <updateRate>10</updateRate>
+            <topicName>barracuda/depth</topicName>
+            <frameName>barracuda/ping1d_link</frameName>
+            <fov>0.05</fov>
+            <radiation>ultrasound</radiation>
+            <robotNamespace>/</robotNamespace>
+          </plugin>
+          <pose>0 0 0 3.14159 1.57079 3.14159</pose>
+        </sensor>
+        <sensor name='ping360_sensor' type='ray'>
+          <visualize>1</visualize>
+          <update_rate>10</update_rate>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>360</samples>
+                <min_angle>-3.14</min_angle>
+                <max_angle>3.14</max_angle>
+                <resolution>1</resolution>
+              </horizontal>
+              <vertical>
+                <samples>1</samples>
+                <min_angle>0</min_angle>
+                <max_angle>0</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.75</min>
+              <max>50</max>
+            </range>
+          </ray>
+          <plugin name='imaging_sonar' filename='libgazebo_ros_laser.so'>
+            <topicName>barracuda/scan</topicName>
+            <frameName>barracuda/ping360_link</frameName>
+            <robotNamespace>/</robotNamespace>
+          </plugin>
+          <pose>0 0 0.2 0 -0 0</pose>
+        </sensor>
+        <sensor name='left_camera' type='depth'>
+          <visualize>1</visualize>
+          <update_rate>15</update_rate>
+          <camera>
+            <horizontal_fov>1.089</horizontal_fov>
+            <image>
+              <format>B8G8R8</format>
+              <width>1920</width>
+              <height>1080</height>
+            </image>
+            <clip>
+              <near>0.04</near>
+              <far>100</far>
+            </clip>
+            <camera_name>barracuda/zed_left_camera_frame</camera_name>
+          </camera>
+          <plugin name='depth_camera_controller' filename='libgazebo_ros_depth_camera.so'>
+            <alwaysOn>1</alwaysOn>
+            <min_depth>0.1</min_depth>
+            <max_depth>100.0</max_depth>
+            <robotNamespace>barracuda</robotNamespace>
+            <updateRate>15.0</updateRate>
+            <frameName>barracuda/zed_left_camera_optical_frame</frameName>
+            <cameraName>left_camera</cameraName>
+            <imageTopicName>left_camera_image</imageTopicName>
+            <pointCloudTopicName>zed_point_cloud</pointCloudTopicName>
+            <depthImageTopicName>zed_image_depth</depthImageTopicName>
+          </plugin>
+          <pose>-0.3 -0.03 0.01325 0 -0 3.14159</pose>
+        </sensor>
+        <sensor name='right_camera' type='camera'>
+          <visualize>1</visualize>
+          <update_rate>15</update_rate>
+          <camera>
+            <horizontal_fov>1.089</horizontal_fov>
+            <image>
+              <format>R8G8B8</format>
+              <width>1920</width>
+              <height>1080</height>
+            </image>
+            <clip>
+              <near>0.04</near>
+              <far>100</far>
+            </clip>
+            <camera_name>barracuda/zed_right_camera_frame</camera_name>
+          </camera>
+          <plugin name='camera_controller' filename='libgazebo_ros_camera.so'>
+            <alwaysOn>1</alwaysOn>
+            <updateRate>15.0</updateRate>
+            <robotNamespace>barracuda</robotNamespace>
+            <frameName>barracuda/zed_right_camera_optical_frame</frameName>
+            <cameraName>right_camera</cameraName>
+            <imageTopicName>right_camera_image</imageTopicName>
+          </plugin>
+          <pose>-0.3 0.03 0.01325 0 -0 3.14159</pose>
+        </sensor>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='barracuda/thruster_0_joint' type='revolute'>
+        <pose relative_to='barracuda/base_link'>0 -0.322 0.1535 -1.57079 1.57079 3.14159</pose>
+        <parent>barracuda/base_link</parent>
+        <child>barracuda/thruster_0</child>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='barracuda/thruster_0'>
+        <pose relative_to='barracuda/thruster_0_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>0</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0</iyy>
+            <iyz>0</iyz>
+            <izz>0</izz>
+          </inertia>
+        </inertial>
+        <collision name='barracuda/thruster_0_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>1e-06</length>
+              <radius>1e-06</radius>
+            </cylinder>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='barracuda/thruster_0_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///opt/barracuda-simulation/catkin_ws/src/barracuda_description/meshes/t200_thruster.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='barracuda/thruster_1_joint' type='revolute'>
+        <pose relative_to='barracuda/base_link'>0.00525 -0.43515 0 1.5708 -0 3.14159</pose>
+        <parent>barracuda/base_link</parent>
+        <child>barracuda/thruster_1</child>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='barracuda/thruster_1'>
+        <pose relative_to='barracuda/thruster_1_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>0</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0</iyy>
+            <iyz>0</iyz>
+            <izz>0</izz>
+          </inertia>
+        </inertial>
+        <collision name='barracuda/thruster_1_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>1e-06</length>
+              <radius>1e-06</radius>
+            </cylinder>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='barracuda/thruster_1_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///opt/barracuda-simulation/catkin_ws/src/barracuda_description/meshes/t200_thruster.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='barracuda/thruster_2_joint' type='revolute'>
+        <pose relative_to='barracuda/base_link'>0 0.322 0.1535 1.57079 1.57079 3.14159</pose>
+        <parent>barracuda/base_link</parent>
+        <child>barracuda/thruster_2</child>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='barracuda/thruster_2'>
+        <pose relative_to='barracuda/thruster_2_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>0</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0</iyy>
+            <iyz>0</iyz>
+            <izz>0</izz>
+          </inertia>
+        </inertial>
+        <collision name='barracuda/thruster_2_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>1e-06</length>
+              <radius>1e-06</radius>
+            </cylinder>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='barracuda/thruster_2_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///opt/barracuda-simulation/catkin_ws/src/barracuda_description/meshes/t200_thruster.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='barracuda/thruster_3_joint' type='revolute'>
+        <pose relative_to='barracuda/base_link'>0.00525 0.43515 0 1.5708 -0 3.14159</pose>
+        <parent>barracuda/base_link</parent>
+        <child>barracuda/thruster_3</child>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='barracuda/thruster_3'>
+        <pose relative_to='barracuda/thruster_3_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>0</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0</iyy>
+            <iyz>0</iyz>
+            <izz>0</izz>
+          </inertia>
+        </inertial>
+        <collision name='barracuda/thruster_3_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>1e-06</length>
+              <radius>1e-06</radius>
+            </cylinder>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='barracuda/thruster_3_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///opt/barracuda-simulation/catkin_ws/src/barracuda_description/meshes/t200_thruster.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='barracuda/thruster_4_joint' type='revolute'>
+        <pose relative_to='barracuda/base_link'>0.30916 0.36341 0 1.5708 0.785399 2.29528</pose>
+        <parent>barracuda/base_link</parent>
+        <child>barracuda/thruster_4</child>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='barracuda/thruster_4'>
+        <pose relative_to='barracuda/thruster_4_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>0</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0</iyy>
+            <iyz>0</iyz>
+            <izz>0</izz>
+          </inertia>
+        </inertial>
+        <collision name='barracuda/thruster_4_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>1e-06</length>
+              <radius>1e-06</radius>
+            </cylinder>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='barracuda/thruster_4_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///opt/barracuda-simulation/catkin_ws/src/barracuda_description/meshes/t200_thruster.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='barracuda/thruster_5_joint' type='revolute'>
+        <pose relative_to='barracuda/base_link'>-0.30916 0.36341 0 -1.5708 0.785398 0.84631</pose>
+        <parent>barracuda/base_link</parent>
+        <child>barracuda/thruster_5</child>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='barracuda/thruster_5'>
+        <pose relative_to='barracuda/thruster_5_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>0</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0</iyy>
+            <iyz>0</iyz>
+            <izz>0</izz>
+          </inertia>
+        </inertial>
+        <collision name='barracuda/thruster_5_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>1e-06</length>
+              <radius>1e-06</radius>
+            </cylinder>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='barracuda/thruster_5_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///opt/barracuda-simulation/catkin_ws/src/barracuda_description/meshes/t200_thruster.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='barracuda/thruster_6_joint' type='revolute'>
+        <pose relative_to='barracuda/base_link'>0.30916 -0.36341 0 -1.5708 0.785399 -2.29528</pose>
+        <parent>barracuda/base_link</parent>
+        <child>barracuda/thruster_6</child>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='barracuda/thruster_6'>
+        <pose relative_to='barracuda/thruster_6_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>0</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0</iyy>
+            <iyz>0</iyz>
+            <izz>0</izz>
+          </inertia>
+        </inertial>
+        <collision name='barracuda/thruster_6_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>1e-06</length>
+              <radius>1e-06</radius>
+            </cylinder>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='barracuda/thruster_6_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///opt/barracuda-simulation/catkin_ws/src/barracuda_description/meshes/t200_thruster.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='barracuda/thruster_7_joint' type='revolute'>
+        <pose relative_to='barracuda/base_link'>-0.30916 -0.36341 0 -0.785398 0.785398 -0.84631</pose>
+        <parent>barracuda/base_link</parent>
+        <child>barracuda/thruster_7</child>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='barracuda/thruster_7'>
+        <pose relative_to='barracuda/thruster_7_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>0</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0</iyy>
+            <iyz>0</iyz>
+            <izz>0</izz>
+          </inertia>
+        </inertial>
+        <collision name='barracuda/thruster_7_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>1e-06</length>
+              <radius>1e-06</radius>
+            </cylinder>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='barracuda/thruster_7_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///opt/barracuda-simulation/catkin_ws/src/barracuda_description/meshes/t200_thruster.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='barracuda/dvl_sonar0_joint' type='revolute'>
+        <pose relative_to='barracuda/base_link'>0 0 -0.15 0 1.1345 0</pose>
+        <parent>barracuda/base_link</parent>
+        <child>barracuda/dvl_sonar0_link</child>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>0</upper>
+            <effort>0</effort>
+            <velocity>0</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='barracuda/dvl_sonar0_link'>
+        <pose relative_to='barracuda/dvl_sonar0_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>1.7e-08</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1.7e-08</iyy>
+            <iyz>0</iyz>
+            <izz>1.7e-08</izz>
+          </inertia>
+        </inertial>
+        <sensor name='dvl_sonar0' type='ray'>
+          <pose>0 0 0 0 -0 0</pose>
+          <update_rate>10</update_rate>
+          <visualize>1</visualize>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>3</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.025</min_angle>
+                <max_angle>0.025</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>3</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.025</min_angle>
+                <max_angle>0.025</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.05</min>
+              <max>50</max>
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+          <plugin name='dvl_sonar0' filename='libgazebo_ros_range.so'>
+            <gaussianNoise>0.005</gaussianNoise>
+            <alwaysOn>1</alwaysOn>
+            <updateRate>10</updateRate>
+            <topicName>barracuda/dvl_sonar0</topicName>
+            <frameName>barracuda/dvl_sonar0_link</frameName>
+            <fov>0.05</fov>
+            <radiation>ultrasound</radiation>
+            <robotNamespace>/</robotNamespace>
+          </plugin>
+        </sensor>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='barracuda/dvl_sonar1_joint' type='revolute'>
+        <pose relative_to='barracuda/base_link'>0 0 -0.15 1.5708 1.1345 1.5708</pose>
+        <parent>barracuda/base_link</parent>
+        <child>barracuda/dvl_sonar1_link</child>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>0</upper>
+            <effort>0</effort>
+            <velocity>0</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='barracuda/dvl_sonar1_link'>
+        <pose relative_to='barracuda/dvl_sonar1_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>1.7e-08</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1.7e-08</iyy>
+            <iyz>0</iyz>
+            <izz>1.7e-08</izz>
+          </inertia>
+        </inertial>
+        <sensor name='dvl_sonar1' type='ray'>
+          <pose>0 0 0 0 -0 0</pose>
+          <update_rate>10</update_rate>
+          <visualize>1</visualize>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>3</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.025</min_angle>
+                <max_angle>0.025</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>3</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.025</min_angle>
+                <max_angle>0.025</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.05</min>
+              <max>50</max>
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+          <plugin name='dvl_sonar1' filename='libgazebo_ros_range.so'>
+            <gaussianNoise>0.005</gaussianNoise>
+            <alwaysOn>1</alwaysOn>
+            <updateRate>10</updateRate>
+            <topicName>barracuda/dvl_sonar1</topicName>
+            <frameName>barracuda/dvl_sonar1_link</frameName>
+            <fov>0.05</fov>
+            <radiation>ultrasound</radiation>
+            <robotNamespace>/</robotNamespace>
+          </plugin>
+        </sensor>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='barracuda/dvl_sonar2_joint' type='revolute'>
+        <pose relative_to='barracuda/base_link'>0 0 -0.15 3.14159 1.1345 3.14159</pose>
+        <parent>barracuda/base_link</parent>
+        <child>barracuda/dvl_sonar2_link</child>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>0</upper>
+            <effort>0</effort>
+            <velocity>0</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='barracuda/dvl_sonar2_link'>
+        <pose relative_to='barracuda/dvl_sonar2_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>1.7e-08</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1.7e-08</iyy>
+            <iyz>0</iyz>
+            <izz>1.7e-08</izz>
+          </inertia>
+        </inertial>
+        <sensor name='dvl_sonar2' type='ray'>
+          <pose>0 0 0 0 -0 0</pose>
+          <update_rate>10</update_rate>
+          <visualize>1</visualize>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>3</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.025</min_angle>
+                <max_angle>0.025</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>3</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.025</min_angle>
+                <max_angle>0.025</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.05</min>
+              <max>50</max>
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+          <plugin name='dvl_sonar2' filename='libgazebo_ros_range.so'>
+            <gaussianNoise>0.005</gaussianNoise>
+            <alwaysOn>1</alwaysOn>
+            <updateRate>10</updateRate>
+            <topicName>barracuda/dvl_sonar2</topicName>
+            <frameName>barracuda/dvl_sonar2_link</frameName>
+            <fov>0.05</fov>
+            <radiation>ultrasound</radiation>
+            <robotNamespace>/</robotNamespace>
+          </plugin>
+        </sensor>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='barracuda/dvl_sonar3_joint' type='revolute'>
+        <pose relative_to='barracuda/base_link'>0 0 -0.15 -1.5708 1.1345 -1.5708</pose>
+        <parent>barracuda/base_link</parent>
+        <child>barracuda/dvl_sonar3_link</child>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>0</upper>
+            <effort>0</effort>
+            <velocity>0</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='barracuda/dvl_sonar3_link'>
+        <pose relative_to='barracuda/dvl_sonar3_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>1.7e-08</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1.7e-08</iyy>
+            <iyz>0</iyz>
+            <izz>1.7e-08</izz>
+          </inertia>
+        </inertial>
+        <sensor name='dvl_sonar3' type='ray'>
+          <pose>0 0 0 0 -0 0</pose>
+          <update_rate>10</update_rate>
+          <visualize>1</visualize>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>3</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.025</min_angle>
+                <max_angle>0.025</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>3</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.025</min_angle>
+                <max_angle>0.025</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.05</min>
+              <max>50</max>
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+          <plugin name='dvl_sonar3' filename='libgazebo_ros_range.so'>
+            <gaussianNoise>0.005</gaussianNoise>
+            <alwaysOn>1</alwaysOn>
+            <updateRate>10</updateRate>
+            <topicName>barracuda/dvl_sonar3</topicName>
+            <frameName>barracuda/dvl_sonar3_link</frameName>
+            <fov>0.05</fov>
+            <radiation>ultrasound</radiation>
+            <robotNamespace>/</robotNamespace>
+          </plugin>
+        </sensor>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='libuuv_gazebo_dvl_plugin' filename='libuuv_gazebo_ros_dvl_plugin.so'>
+        <robot_namespace>barracuda</robot_namespace>
+        <link_name>barracuda/base_link</link_name>
+        <sensor_topic>dvl</sensor_topic>
+        <update_rate>10</update_rate>
+        <noise_sigma>0.005</noise_sigma>
+        <noise_amplitude>0.005</noise_amplitude>
+        <enable_gazebo_messages>0</enable_gazebo_messages>
+        <enable_local_ned_frame>0</enable_local_ned_frame>
+        <static_reference_frame>world</static_reference_frame>
+        <beam_link_name_0>barracuda/dvl_sonar0_link</beam_link_name_0>
+        <beam_link_name_1>barracuda/dvl_sonar1_link</beam_link_name_1>
+        <beam_link_name_2>barracuda/dvl_sonar2_link</beam_link_name_2>
+        <beam_link_name_3>barracuda/dvl_sonar3_link</beam_link_name_3>
+        <beam_topic_0>dvl_sonar0</beam_topic_0>
+        <beam_topic_1>dvl_sonar1</beam_topic_1>
+        <beam_topic_2>dvl_sonar2</beam_topic_2>
+        <beam_topic_3>dvl_sonar3</beam_topic_3>
+        <robotNamespace>/</robotNamespace>
+      </plugin>
+      <plugin name='uuv_plugin' filename='libuuv_underwater_object_ros_plugin.so'>
+        <fluid_density>1028.0</fluid_density>
+        <flow_velocity_topic>hydrodynamics/current_velocity</flow_velocity_topic>
+        <debug>0</debug>
+        <link name='barracuda/base_link'>
+          <neutrally_buoyant>1</neutrally_buoyant>
+          <volume>0.036</volume>
+          <box>
+            <width>0.75</width>
+            <length>0.64</length>
+            <height>0.39</height>
+          </box>
+          <center_of_buoyancy>0.0 0.0 0.3</center_of_buoyancy>
+          <hydrodynamic_model>
+            <type>fossen</type>
+            <added_mass>15.0 -0.1 -2.0 0.2 -3.0 -0.15 -0.1 25.0 1.0 8.0 -0.1 1.2 -2.0 1.0 70.0 0.1 -7.5 0.2 0.2 8.0 0.1 10.0 -0.2 0.4 -3.0 -0.1 -7.5 -0.2 16.0 -0.02 -0.15 1.2 0.2 0.4 -0.02 4.5</added_mass>
+            <linear_damping>-15.0 -12.0 -35.0 -25.0 -20.0 -8.0</linear_damping>
+            <quadratic_damping>-50.0 -65.0 -120.0 -45.0 -52.0 -35.0</quadratic_damping>
+          </hydrodynamic_model>
+        </link>
+        <robotNamespace>/</robotNamespace>
+      </plugin>
+      <plugin name='gazebo_ros_control' filename='libgazebo_ros_control.so'>
+        <robotNamespace>barracuda</robotNamespace>
+        <robotParam>robot_description</robotParam>
+      </plugin>
+      <plugin name='barracuda_0_thruster_model' filename='libuuv_thruster_ros_plugin.so'>
+        <linkName>barracuda/thruster_0</linkName>
+        <jointName>barracuda/thruster_0_joint</jointName>
+        <thrusterID>0</thrusterID>
+        <dynamics>
+          <type>FirstOrder</type>
+          <timeConstant>0.05</timeConstant>
+        </dynamics>
+        <conversion>
+          <type>Basic</type>
+          <rotorConstant>0.00031</rotorConstant>
+        </conversion>
+        <robotNamespace>/</robotNamespace>
+      </plugin>
+      <plugin name='barracuda_1_thruster_model' filename='libuuv_thruster_ros_plugin.so'>
+        <linkName>barracuda/thruster_1</linkName>
+        <jointName>barracuda/thruster_1_joint</jointName>
+        <thrusterID>1</thrusterID>
+        <dynamics>
+          <type>FirstOrder</type>
+          <timeConstant>0.05</timeConstant>
+        </dynamics>
+        <conversion>
+          <type>Basic</type>
+          <rotorConstant>0.00031</rotorConstant>
+        </conversion>
+        <robotNamespace>/</robotNamespace>
+      </plugin>
+      <plugin name='barracuda_2_thruster_model' filename='libuuv_thruster_ros_plugin.so'>
+        <linkName>barracuda/thruster_2</linkName>
+        <jointName>barracuda/thruster_2_joint</jointName>
+        <thrusterID>2</thrusterID>
+        <dynamics>
+          <type>FirstOrder</type>
+          <timeConstant>0.05</timeConstant>
+        </dynamics>
+        <conversion>
+          <type>Basic</type>
+          <rotorConstant>0.00031</rotorConstant>
+        </conversion>
+        <robotNamespace>/</robotNamespace>
+      </plugin>
+      <plugin name='barracuda_3_thruster_model' filename='libuuv_thruster_ros_plugin.so'>
+        <linkName>barracuda/thruster_3</linkName>
+        <jointName>barracuda/thruster_3_joint</jointName>
+        <thrusterID>3</thrusterID>
+        <dynamics>
+          <type>FirstOrder</type>
+          <timeConstant>0.05</timeConstant>
+        </dynamics>
+        <conversion>
+          <type>Basic</type>
+          <rotorConstant>0.00031</rotorConstant>
+        </conversion>
+        <robotNamespace>/</robotNamespace>
+      </plugin>
+      <plugin name='barracuda_4_thruster_model' filename='libuuv_thruster_ros_plugin.so'>
+        <linkName>barracuda/thruster_4</linkName>
+        <jointName>barracuda/thruster_4_joint</jointName>
+        <thrusterID>4</thrusterID>
+        <dynamics>
+          <type>FirstOrder</type>
+          <timeConstant>0.05</timeConstant>
+        </dynamics>
+        <conversion>
+          <type>Basic</type>
+          <rotorConstant>0.00031</rotorConstant>
+        </conversion>
+        <robotNamespace>/</robotNamespace>
+      </plugin>
+      <plugin name='barracuda_5_thruster_model' filename='libuuv_thruster_ros_plugin.so'>
+        <linkName>barracuda/thruster_5</linkName>
+        <jointName>barracuda/thruster_5_joint</jointName>
+        <thrusterID>5</thrusterID>
+        <dynamics>
+          <type>FirstOrder</type>
+          <timeConstant>0.05</timeConstant>
+        </dynamics>
+        <conversion>
+          <type>Basic</type>
+          <rotorConstant>0.00031</rotorConstant>
+        </conversion>
+        <robotNamespace>/</robotNamespace>
+      </plugin>
+      <plugin name='barracuda_6_thruster_model' filename='libuuv_thruster_ros_plugin.so'>
+        <linkName>barracuda/thruster_6</linkName>
+        <jointName>barracuda/thruster_6_joint</jointName>
+        <thrusterID>6</thrusterID>
+        <dynamics>
+          <type>FirstOrder</type>
+          <timeConstant>0.05</timeConstant>
+        </dynamics>
+        <conversion>
+          <type>Basic</type>
+          <rotorConstant>0.00031</rotorConstant>
+        </conversion>
+        <robotNamespace>/</robotNamespace>
+      </plugin>
+      <plugin name='barracuda_7_thruster_model' filename='libuuv_thruster_ros_plugin.so'>
+        <linkName>barracuda/thruster_7</linkName>
+        <jointName>barracuda/thruster_7_joint</jointName>
+        <thrusterID>7</thrusterID>
+        <dynamics>
+          <type>FirstOrder</type>
+          <timeConstant>0.05</timeConstant>
+        </dynamics>
+        <conversion>
+          <type>Basic</type>
+          <rotorConstant>0.00031</rotorConstant>
+        </conversion>
+        <robotNamespace>/</robotNamespace>
+      </plugin>
+      <plugin name='uuv_joint_state_publisher' filename='libuuv_joint_state_publisher.so'>
+        <robotNamespace>barracuda</robotNamespace>
+        <updateRate>50</updateRate>
+      </plugin>
+      <frame name='barracuda/imu_joint' attached_to='barracuda/barracuda_link'>
+        <pose>0 0 0 0 -0 0</pose>
+      </frame>
+      <frame name='barracuda/imu_link' attached_to='barracuda/imu_joint'/>
+      <frame name='barracuda/ping1d_joint' attached_to='barracuda/barracuda_link'>
+        <pose>0 0 0 3.14159 1.57079 3.14159</pose>
+      </frame>
+      <frame name='barracuda/ping1d_link' attached_to='barracuda/ping1d_joint'/>
+      <frame name='barracuda/ping360_joint' attached_to='barracuda/barracuda_link'>
+        <pose>0 0 0.2 0 -0 0</pose>
+      </frame>
+      <frame name='barracuda/ping360_link' attached_to='barracuda/ping360_joint'/>
+      <frame name='zed_left_camera_optical_joint' attached_to='barracuda/zed_left_camera_frame'>
+        <pose>0 0 0 -1.5708 -0 -1.5708</pose>
+      </frame>
+      <frame name='barracuda/zed_left_camera_optical_frame' attached_to='zed_left_camera_optical_joint'/>
+      <frame name='zed_left_camera_joint' attached_to='barracuda/zed_camera_center'>
+        <pose>0 0.03 0 0 -0 0</pose>
+      </frame>
+      <frame name='barracuda/zed_left_camera_frame' attached_to='zed_left_camera_joint'/>
+      <frame name='zed_right_camera_optical_joint' attached_to='barracuda/zed_right_camera_frame'>
+        <pose>0 0 0 -1.5708 -0 -1.5708</pose>
+      </frame>
+      <frame name='barracuda/zed_right_camera_optical_frame' attached_to='zed_right_camera_optical_joint'/>
+      <frame name='zed_right_camera_joint' attached_to='barracuda/zed_camera_center'>
+        <pose>0 -0.03 0 0 -0 0</pose>
+      </frame>
+      <frame name='barracuda/zed_right_camera_frame' attached_to='zed_right_camera_joint'/>
+      <frame name='zed_camera_center_joint' attached_to='barracuda/zed_base_link'>
+        <pose>0 0 0.01325 0 -0 0</pose>
+      </frame>
+      <frame name='barracuda/zed_camera_center' attached_to='zed_camera_center_joint'/>
+      <frame name='zed_base_joint' attached_to='barracuda/barracuda_link'>
+        <pose>-0.3 0 0 0 -0 3.14159</pose>
+      </frame>
+      <frame name='barracuda/zed_base_link' attached_to='zed_base_joint'/>
+      <frame name='barracuda/barracuda_base_joint' attached_to='barracuda/base_link'>
+        <pose>0 0 0 0 -0 0</pose>
+      </frame>
+      <frame name='barracuda/barracuda_link' attached_to='barracuda/barracuda_base_joint'/>
+      <frame name='barracuda/dvl_joint' attached_to='barracuda/base_link'>
+        <pose>0 0 -0.15 3.14159 1.57079 3.14159</pose>
+      </frame>
+      <frame name='barracuda/dvl_link' attached_to='barracuda/dvl_joint'/>
+      <pose>25 0 -85 0 -0 3.14</pose>
+    </model>
+    <light name='user_directional_light_0' type='directional'>
+      <pose>96.3504 68.0902 1 0 -0 0</pose>
+      <diffuse>0.5 0.5 0.5 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <direction>0.1 0.1 -0.9</direction>
+      <attenuation>
+        <range>20</range>
+        <constant>0.5</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <cast_shadows>1</cast_shadows>
+    </light>
+    <light name='user_point_light_0' type='point'>
+      <pose>18.7025 -9.41056 1 0 -0 0</pose>
+      <diffuse>0.5 0.5 0.5 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <attenuation>
+        <range>20</range>
+        <constant>0.5</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <cast_shadows>0</cast_shadows>
+      <direction>0 0 -1</direction>
+    </light>
+    <state world_name='oceans_waves'>
+      <sim_time>431 758000000</sim_time>
+      <real_time>1105 848816621</real_time>
+      <wall_time>1754470028 999212445</wall_time>
+      <iterations>215879</iterations>
+      <model name='barracuda'>
+        <pose>25 0 -6.19979 0 1e-06 3.14</pose>
+        <scale>1 1 1</scale>
+        <link name='barracuda/base_link'>
+          <pose>25 0 -6.19979 0 1e-06 3.14</pose>
+          <velocity>-0 0 -0.003322 -0 -0 -0</velocity>
+          <acceleration>-0 -0 -0 0 -0 0</acceleration>
+          <wrench>-0 -0 -0 0 -0 0</wrench>
+        </link>
+        <link name='barracuda/dvl_sonar0_link'>
+          <pose>25 0 -6.34978 0 1.1345 3.14</pose>
+          <velocity>-0 0 -0.003322 0 -0 0</velocity>
+          <acceleration>-0 -0 -0 -1e-06 -1e-06 0</acceleration>
+          <wrench>-0 -0 -0 0 -0 0</wrench>
+        </link>
+        <link name='barracuda/dvl_sonar1_link'>
+          <pose>25 0 -6.34978 1.5708 1.1345 -1.57238</pose>
+          <velocity>-0 -0 -0.003322 0 -0 0</velocity>
+          <acceleration>-0 -0 -0 -1e-06 0 0</acceleration>
+          <wrench>-0 -0 -0 0 -0 0</wrench>
+        </link>
+        <link name='barracuda/dvl_sonar2_link'>
+          <pose>25 0 -6.34978 3.14159 1.1345 -0.001595</pose>
+          <velocity>-0 -0 -0.003322 0 -0 0</velocity>
+          <acceleration>-0 -0 -0 0 -0 0</acceleration>
+          <wrench>-0 -0 -0 0 -0 0</wrench>
+        </link>
+        <link name='barracuda/dvl_sonar3_link'>
+          <pose>25 0 -6.34978 -1.5708 1.1345 1.5692</pose>
+          <velocity>-0 0 -0.003322 0 -0 0</velocity>
+          <acceleration>-0 1e-06 -0 0 -0 1e-06</acceleration>
+          <wrench>-0 0 -0 0 -0 0</wrench>
+        </link>
+        <link name='barracuda/thruster_0'>
+          <pose>25.0005 0.322 -6.04629 -1.59396 1.57079 -0.024754</pose>
+          <velocity>-0 0 -0.003322 -0 -0 -0</velocity>
+          <acceleration>0 -0 0 0 -0 0</acceleration>
+          <wrench>0 -0 0 0 -0 0</wrench>
+        </link>
+        <link name='barracuda/thruster_1'>
+          <pose>24.9954 0.435158 -6.19979 1.5708 -1e-06 -0.001594</pose>
+          <velocity>-0 0 -0.003322 -0 -0 -0</velocity>
+          <acceleration>0 -0 0 0 -0 0</acceleration>
+          <wrench>0 -0 0 0 -0 0</wrench>
+        </link>
+        <link name='barracuda/thruster_2'>
+          <pose>24.9995 -0.321999 -6.04629 1.54763 1.57079 -0.024754</pose>
+          <velocity>-0 0 -0.003322 -0 -0 -0</velocity>
+          <acceleration>0 -0 0 0 -0 0</acceleration>
+          <wrench>0 -0 0 0 -0 0</wrench>
+        </link>
+        <link name='barracuda/thruster_3'>
+          <pose>24.9941 -0.435141 -6.19979 1.5708 -1e-06 -0.001594</pose>
+          <velocity>-0 0 -0.003322 -0 -0 -0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+        <link name='barracuda/thruster_4'>
+          <pose>24.6903 -0.362917 -6.19979 1.5708 0.785398 -0.847904</pose>
+          <velocity>-0 0 -0.003322 -0 -0 -0</velocity>
+          <acceleration>-0 -0 0 0 -0 0</acceleration>
+          <wrench>-0 -0 0 0 -0 0</wrench>
+        </link>
+        <link name='barracuda/thruster_5'>
+          <pose>25.3086 -0.363901 -6.19978 -1.5708 0.785398 -2.29687</pose>
+          <velocity>-0 0 -0.003322 -0 -0 -0</velocity>
+          <acceleration>0 0 -0 0 -0 0</acceleration>
+          <wrench>0 0 -0 0 -0 0</wrench>
+        </link>
+        <link name='barracuda/thruster_6'>
+          <pose>24.6914 0.363902 -6.19979 -1.5708 0.785399 0.84472</pose>
+          <velocity>-0 0 -0.003322 -0 -0 -0</velocity>
+          <acceleration>-0 -0 0 0 -0 0</acceleration>
+          <wrench>-0 -0 0 0 -0 0</wrench>
+        </link>
+        <link name='barracuda/thruster_7'>
+          <pose>25.3097 0.362918 -6.19979 -0.785399 0.785399 2.29369</pose>
+          <velocity>-0 0 -0.003322 -0 -0 -0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='gate'>
+        <pose>26.113 0.598898 -6.87215 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='base_link'>
+          <pose>26.113 0.598898 -6.87215 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='sand_heightmap'>
+        <pose>0 0 -95 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 0 -95 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='world_ned'>
+        <pose>0 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='world_ned'>
+          <pose>0 0 0 -3.14159 -0 1.5708</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <light name='sun1'>
+        <pose>50 0 150 0 -0 0</pose>
+      </light>
+      <light name='sun_diffuse'>
+        <pose>-50 0 -150 0 -0 0</pose>
+      </light>
+      <light name='sun_diffuse_1'>
+        <pose>-100 500 -20 0 -0 0</pose>
+      </light>
+      <light name='sun_diffuse_2'>
+        <pose>-150 -130 50 0 -0 0</pose>
+      </light>
+      <light name='user_directional_light_0'>
+        <pose>-2.96259 -0.30055 4.12352 -0.488847 -0.728216 0.844747</pose>
+      </light>
+      <light name='user_point_light_0'>
+        <pose>25.857 -1.1616 -5.52171 0 -0 0</pose>
+      </light>
+    </state>
+  </world>
+</sdf>

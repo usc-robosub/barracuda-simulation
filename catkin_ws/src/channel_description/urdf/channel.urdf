@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="Channel">
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="50.0" />
+      <inertia
+        ixx="10.0"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="10.0"
+        iyz="0.0"
+        izz="10.0" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://channel_description/meshes/02_channel_full.dae" />
+      </geometry>
+      <material name="">
+        <color rgba="0.5 0.5 0.5 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://channel_description/meshes/02_channel_full.dae" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <!-- Additional gazebo properties for the entire robot -->
+  <gazebo>
+    <static>true</static>
+  </gazebo>
+</robot>
