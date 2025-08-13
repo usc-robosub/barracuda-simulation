@@ -16,7 +16,8 @@ RUN . /opt/ros/noetic/setup.sh \
     && catkin build barracuda_description \
     && catkin build barracuda_simulation \
     && catkin build gate_description \
-    && catkin build channel_description
+    && catkin build channel_description \
+    && catkin build pool_description
 
 
 # Set working directory
