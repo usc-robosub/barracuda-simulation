@@ -21,12 +21,28 @@
   <arg name="robot_yaw" default="0"/>
   
   <!-- Gate spawn position -->
-  <arg name="gate_x" default="50"/>
+  <arg name="gate_x" default="30"/>
   <arg name="gate_y" default="0"/>
   <arg name="gate_z" default="-85"/>
-  <arg name="gate_roll" default="1.5708"/>
+  <arg name="gate_roll" default="0"/>
   <arg name="gate_pitch" default="0"/>
-  <arg name="gate_yaw" default="1.5708"/>
+  <arg name="gate_yaw" default="0"/>
+  
+  <!-- Channel spawn position -->
+  <arg name="channel_x" default="35"/>
+  <arg name="channel_y" default="0"/>
+  <arg name="channel_z" default="-85"/>
+  <arg name="channel_roll" default="0"/>
+  <arg name="channel_pitch" default="0"/>
+  <arg name="channel_yaw" default="0"/>
+  
+  <!-- Pool spawn position -->
+  <arg name="pool_x" default="40"/>
+  <arg name="pool_y" default="0"/>
+  <arg name="pool_z" default="-85"/>
+  <arg name="pool_roll" default="0"/>
+  <arg name="pool_pitch" default="0"/>
+  <arg name="pool_yaw" default="0"/>
 
   <!-- Launch Gazebo with the ocean world -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -37,6 +53,7 @@
     <arg name="headless" value="false"/>
     <arg name="debug" value="$(arg debug)"/>
     <arg name="verbose" value="$(arg verbose)"/>
+    <arg name="extra_gazebo_args" value="/barracuda/dvl_twist:=/barracuda/dvl/twist" />
   </include>
 
   <!-- Use NED frame (North East Down) -->
@@ -99,6 +116,22 @@
   <node name="spawn_gate" pkg="gazebo_ros" type="spawn_model"
         respawn="false" output="screen"
         args="-urdf -x $(arg gate_x) -y $(arg gate_y) -z $(arg gate_z) -R $(arg gate_roll) -P $(arg gate_pitch) -Y $(arg gate_yaw) -model gate -param gate_description -reference_frame world"/>
+
+  <!-- Load the channel description -->
+  <param name="channel_description" textfile="$(find channel_description)/urdf/channel.urdf" />
+  
+  <!-- Spawn the channel in Gazebo -->
+  <node name="spawn_channel" pkg="gazebo_ros" type="spawn_model"
+        respawn="false" output="screen"
+        args="-urdf -x $(arg channel_x) -y $(arg channel_y) -z $(arg channel_z) -R $(arg channel_roll) -P $(arg channel_pitch) -Y $(arg channel_yaw) -model channel -param channel_description -reference_frame world"/>
+
+  <!-- Load the pool description -->
+  <param name="pool_description" textfile="$(find pool_description)/urdf/pool.urdf" />
+  
+  <!-- Spawn the pool in Gazebo -->
+  <node name="spawn_pool" pkg="gazebo_ros" type="spawn_model"
+        respawn="false" output="screen"
+        args="-urdf -x $(arg pool_x) -y $(arg pool_y) -z $(arg pool_z) -R $(arg pool_roll) -P $(arg pool_pitch) -Y $(arg pool_yaw) -model pool -param pool_description -reference_frame world"/>
 
   <!-- Transform from world to map for navigation -->
   <node pkg="tf2_ros" type="static_transform_publisher" name="world_to_map" args="0 0 0 0 0 0 world map"/>

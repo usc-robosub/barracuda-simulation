@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="Pool">
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="100.0" />
+      <inertia
+        ixx="20.0"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="20.0"
+        iyz="0.0"
+        izz="20.0" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://pool_description/meshes/pool.dae" />
+      </geometry>
+      <material name="">
+        <color rgba="0.2 0.6 0.8 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://pool_description/meshes/pool.dae" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <!-- Additional gazebo properties for the entire robot -->
+  <gazebo>
+    <static>true</static>
+  </gazebo>
+</robot>
